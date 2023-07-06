@@ -1,9 +1,48 @@
 pub struct Solution;
 
+// this is janky.. two binary searches is certainly not.. ideal
+// looking through others solutions, I've seen some people just concating
+// matrix into one vec(lmao), and some where people are doing some weird
+// use of quotient/math trickery to discern which subvec the value is contained
+// in. 100% can be optimized/more idiomatic, however it does run good XD
+
+use std::cmp::Ordering;
 impl Solution {
     pub fn search_matrix(matrix: Vec<Vec<i32>>, target: i32) -> bool {
+        let (mut left, mut right) = (0, matrix.len());
 
-        todo!();
+        while left < right {
+            let mid = left + (right - left) / 2;
+            let len = matrix[mid].len();
+
+            if target >= matrix[mid][0] {
+                if target <= matrix[mid][len - 1] {
+                    return Self::search(&matrix[mid], target);
+                } else {
+                    left = mid + 1;
+                }
+            } else {
+                right = mid;
+            }
+        }
+        false
+    }
+
+    fn search(nums: &Vec<i32>, target: i32) -> bool {
+        let mut left = 0;
+        let mut right = nums.len();
+
+        while left < right {
+            let mid = left + (right - left) / 2;
+
+            match target.cmp(&nums[mid]) {
+                Ordering::Equal => return true,
+                Ordering::Greater => left = mid + 1,
+                Ordering::Less => right = mid,
+            }
+        }
+
+        false
     }
 }
 
