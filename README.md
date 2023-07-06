@@ -1,3 +1,3 @@
 # Personal leetcode solutions in rust
 
-following the [neetcode roadmap](https://neetcode.io/roadmap)
+redoing a lot of the [neetcode roadmap](https://neetcode.io/roadmap) in rust
