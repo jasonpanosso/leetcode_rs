@@ -1,6 +1,7 @@
 pub mod can_place_flowers;
 pub mod contains_duplicate;
 pub mod group_anagrams;
+pub mod increasing_triplet_subsequence;
 pub mod kids_with_candies;
 pub mod longest_consecutive_sequence;
 pub mod merge_strings_alternately;
