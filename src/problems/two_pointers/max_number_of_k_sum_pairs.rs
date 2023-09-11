@@ -4,7 +4,7 @@ pub struct Solution;
 
 impl Solution {
     pub fn max_operations(nums: Vec<i32>, k: i32) -> i32 {
-        let mut num_counts: HashMap<&i32, i32> = HashMap::new();
+        let mut num_counts = HashMap::with_capacity(nums.len());
         let mut operation_count = 0;
 
         for num in nums.iter() {
@@ -13,7 +13,12 @@ impl Solution {
                     *count -= 1;
                     operation_count += 1
                 }
-                _ => *num_counts.entry(num).or_default() += 1,
+                _ => {
+                    num_counts
+                        .entry(num)
+                        .and_modify(|count| *count += 1)
+                        .or_insert(1);
+                }
             }
         }
 
