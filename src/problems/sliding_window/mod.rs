@@ -1,5 +1,9 @@
 pub mod best_time_to_buy_and_sell_stock;
-pub mod longest_substring_without_repeating_characters;
 pub mod longest_repeating_character_replacement;
-pub mod permutation_in_string;
+pub mod longest_subarray_of_ones_after_deleting_one_element;
+pub mod longest_substring_without_repeating_characters;
+pub mod max_consecutive_ones_3;
+pub mod maximum_average_subarray_1;
+pub mod maximum_number_of_vowels_in_substring;
 pub mod minimum_window_substring;
+pub mod permutation_in_string;
