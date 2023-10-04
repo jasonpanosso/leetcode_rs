@@ -1,5 +1,6 @@
 pub mod arrays_and_hashing;
 pub mod binary_search;
+pub mod binary_tree;
 pub mod linked_list;
 pub mod prefix_sum;
 pub mod queue;
