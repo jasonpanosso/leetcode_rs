@@ -7,28 +7,26 @@ use std::rc::Rc;
 
 impl Solution {
     pub fn right_side_view(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
-        let mut output: Vec<i32> = vec![];
-        if root.is_none() {
-            return output;
-        }
+        let mut output = vec![];
+        if let Some(root) = root {
+            let mut queue = VecDeque::new();
+            queue.push_back(root);
 
-        let mut queue = VecDeque::new();
-        queue.push_back(root.unwrap());
-
-        while queue.len() > 0 {
-            let queue_len = queue.len();
-            for i in 0..queue_len {
-                if let Some(node) = queue.pop_front() {
+            while !queue.is_empty() {
+                let queue_len = queue.len();
+                for i in 0..queue_len {
+                    let node = queue.pop_front().unwrap();
+                    let node = node.borrow();
                     if i == queue_len - 1 {
-                        output.push(node.borrow().val)
+                        output.push(node.val);
                     }
 
-                    if let Some(left) = node.borrow().left.clone() {
-                        queue.push_back(left);
+                    if let Some(left) = &node.left {
+                        queue.push_back(left.clone());
                     }
 
-                    if let Some(right) = node.borrow().right.clone() {
-                        queue.push_back(right);
+                    if let Some(right) = &node.right {
+                        queue.push_back(right.clone());
                     }
                 }
             }
