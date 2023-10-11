@@ -1,10 +1,23 @@
-use std::{cell::RefCell, collections::VecDeque, rc::Rc};
+use std::{cell::RefCell, collections::VecDeque, fmt, rc::Rc};
 
-#[derive(Debug, PartialEq, Eq)]
+#[derive(PartialEq, Eq)]
 pub struct TreeNode {
     pub val: i32,
     pub left: Option<Rc<RefCell<TreeNode>>>,
     pub right: Option<Rc<RefCell<TreeNode>>>,
+}
+
+impl fmt::Debug for TreeNode {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{}", self.val)?;
+        if let Some(ref left) = self.left {
+            write!(f, " Left [{:?}]", left.borrow())?;
+        }
+        if let Some(ref right) = self.right {
+            write!(f, " Right [{:?}]", right.borrow())?;
+        }
+        Ok(())
+    }
 }
 
 impl TreeNode {
