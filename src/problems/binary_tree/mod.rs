@@ -2,6 +2,7 @@ pub mod diameter;
 pub mod good_nodes;
 pub mod is_balanced;
 pub mod leaf_similar;
+pub mod level_order_traversal;
 pub mod longest_zig_zag;
 pub mod lowest_common_ancestor;
 pub mod max_level_sum;
