@@ -1,5 +1,6 @@
 pub mod diameter;
 pub mod good_nodes;
+pub mod is_balanced;
 pub mod leaf_similar;
 pub mod longest_zig_zag;
 pub mod lowest_common_ancestor;
