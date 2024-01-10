@@ -1,33 +1,39 @@
-pub struct Solution;
-
 use crate::data_structures::tree_node::TreeNode;
-
 use std::cell::RefCell;
 use std::rc::Rc;
 
-type Node = Option<Rc<RefCell<TreeNode>>>;
+type TreeNodeRef = Rc<RefCell<TreeNode>>;
+
+pub struct Solution;
 
 impl Solution {
-    pub fn lowest_common_ancestor(root: Node, p: Node, q: Node) -> Node {
-        if let (Some(node), Some(p), Some(q)) = (&root, &p, &q) {
-            if node.borrow().val == p.borrow().val || node.borrow().val == q.borrow().val {
-                return Some(node.clone());
+    pub fn lowest_common_ancestor(
+        root: Option<TreeNodeRef>,
+        p: Option<TreeNodeRef>,
+        q: Option<TreeNodeRef>,
+    ) -> Option<TreeNodeRef> {
+        if let (Some(p), Some(q)) = (p, q) {
+            Self::helper(&root, &p.borrow(), &q.borrow())
+        } else {
+            None
+        }
+    }
+
+    // avoid having to constantly borrow + clone p & q
+    fn helper(maybe_node: &Option<TreeNodeRef>, p: &TreeNode, q: &TreeNode) -> Option<TreeNodeRef> {
+        if let Some(node) = maybe_node {
+            let node_borrow = node.borrow();
+
+            if node_borrow.val == p.val || node_borrow.val == q.val {
+                return Some(Rc::clone(node));
             }
 
-            let left = Self::lowest_common_ancestor(
-                node.borrow().left.clone(),
-                Some(p.clone()),
-                Some(q.clone()),
-            );
+            let left = Self::helper(&node_borrow.left, p, q);
 
-            let right = Self::lowest_common_ancestor(
-                node.borrow().right.clone(),
-                Some(p.clone()),
-                Some(q.clone()),
-            );
+            let right = Self::helper(&node_borrow.right, p, q);
 
             match (left, right) {
-                (Some(_), Some(_)) => Some(node.clone()),
+                (Some(_), Some(_)) => Some(Rc::clone(node)),
                 (Some(left_or_right), None) | (None, Some(left_or_right)) => Some(left_or_right),
                 (None, None) => None,
             }
