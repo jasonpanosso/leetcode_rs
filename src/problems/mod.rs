@@ -9,4 +9,5 @@ pub mod prefix_sum;
 pub mod queue;
 pub mod sliding_window;
 pub mod stack;
+pub mod trie;
 pub mod two_pointers;
