@@ -5,12 +5,12 @@ impl Solution {
         let total_sum: i32 = nums.iter().sum();
         let mut prefix_sum = 0;
 
-        for i in 0..nums.len() {
-            if prefix_sum == total_sum - prefix_sum - nums[i] {
+        for (i, val) in nums.iter().enumerate() {
+            if prefix_sum == total_sum - prefix_sum - val {
                 return i as i32;
             }
 
-            prefix_sum += nums[i];
+            prefix_sum += val;
         }
         -1
     }

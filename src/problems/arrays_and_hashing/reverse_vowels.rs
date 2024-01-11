@@ -2,10 +2,7 @@ pub struct Solution;
 
 impl Solution {
     fn is_vowel(c: char) -> bool {
-        match c.to_ascii_lowercase() {
-            'a' | 'e' | 'i' | 'o' | 'u' => true,
-            _ => false,
-        }
+        matches!(c.to_ascii_lowercase(), 'a' | 'e' | 'i' | 'o' | 'u')
     }
 
     pub fn reverse_vowels(s: String) -> String {

@@ -25,7 +25,7 @@ impl Solution {
                 }
             }
         }
-        Vec::from_iter(set.into_iter())
+        Vec::from_iter(set)
     }
 }
 

@@ -10,12 +10,12 @@ impl Solution {
         let mut vec2: Vec<i32> = vec![];
 
         for num in set1.iter() {
-            if !set2.contains(&num) {
+            if !set2.contains(num) {
                 vec1.push(*num);
             }
         }
         for num in set2.iter() {
-            if !set1.contains(&num) {
+            if !set1.contains(num) {
                 vec2.push(*num);
             }
         }

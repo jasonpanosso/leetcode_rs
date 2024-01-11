@@ -2,7 +2,7 @@ pub struct Solution;
 
 impl Solution {
     pub fn check_inclusion(s1: String, s2: String) -> bool {
-        if s1.len() > s2.len() || s1.len() == 0 {
+        if s1.len() > s2.len() || s1.is_empty() {
             return false;
         }
         let window_size = s1.len();

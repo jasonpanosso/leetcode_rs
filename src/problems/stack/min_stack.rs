@@ -2,9 +2,15 @@ pub struct MinStack {
     stack: Vec<(i32, i32)>,
 }
 
+impl Default for MinStack {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl MinStack {
     pub fn new() -> Self {
-        return MinStack { stack: Vec::new() };
+        MinStack { stack: Vec::new() }
     }
 
     pub fn push(&mut self, val: i32) {

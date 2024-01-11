@@ -50,9 +50,9 @@ impl Solution {
 
     fn get_index(ch: char) -> usize {
         if ch.is_uppercase() {
-            return ch as usize - 'A' as usize;
+            ch as usize - 'A' as usize
         } else {
-            return 26 + ch as usize - 'a' as usize;
+            26 + ch as usize - 'a' as usize
         }
     }
 }

@@ -71,7 +71,7 @@ mod tests {
         let root2 = TreeNode::from_vec(tree2);
         // println!("{:?}", root1);
         // println!("{:?}", root2);
-        assert_eq!(Solution::leaf_similar(root1, root2), true);
+        assert!(Solution::leaf_similar(root1, root2));
     }
 
     #[test]
@@ -83,6 +83,6 @@ mod tests {
         let root2 = TreeNode::from_vec(tree2);
         println!("{:?}", root1);
         println!("{:?}", root2);
-        assert_eq!(Solution::leaf_similar(root1, root2), false);
+        assert!(!Solution::leaf_similar(root1, root2));
     }
 }

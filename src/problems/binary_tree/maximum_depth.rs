@@ -14,7 +14,7 @@ impl Solution {
                     Self::helper(node.borrow().right.clone(), depth + 1),
                 );
             }
-            None => return depth,
+            None => depth,
         }
     }
     pub fn max_depth(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {

@@ -12,7 +12,7 @@ impl Solution {
         for str in strs.into_iter() {
             let mut chars: Vec<char> = str.chars().collect();
             chars.sort();
-            hashmap.entry(chars).or_insert_with(Vec::new).push(str)
+            hashmap.entry(chars).or_default().push(str)
         }
         hashmap.into_values().collect()
     }

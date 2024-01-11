@@ -8,11 +8,11 @@ impl Solution {
         while let Some(char) = chars.next() {
             if char == ']' {
                 return output;
-            } else if char.is_digit(10) {
+            } else if char.is_ascii_digit() {
                 let mut digits = String::from(char);
 
-                while let Some(maybe_digit) = chars.next() {
-                    if maybe_digit.is_digit(10) {
+                for maybe_digit in chars.by_ref() {
+                    if maybe_digit.is_ascii_digit() {
                         digits.push(maybe_digit)
                     } else {
                         break;

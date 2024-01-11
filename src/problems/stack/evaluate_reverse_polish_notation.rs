@@ -46,7 +46,7 @@ impl Solution {
         }
 
         match stack.pop() {
-            Some(res) => return res,
+            Some(res) => res,
             None => panic!["Stack is empty, cannot pop a value"],
         }
     }

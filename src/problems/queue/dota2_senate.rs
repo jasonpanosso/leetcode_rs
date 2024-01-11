@@ -16,11 +16,11 @@ impl Solution {
             }
         }
 
-        return match stack.pop().unwrap() {
+        match stack.pop().unwrap() {
             'R' => String::from("Radiant"),
             'D' => String::from("Dire"),
             _ => unreachable!(),
-        };
+        }
     }
 }
 

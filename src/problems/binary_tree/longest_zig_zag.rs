@@ -6,8 +6,8 @@ use std::cmp::max;
 use std::rc::Rc;
 
 enum Direction {
-    LEFT,
-    RIGHT,
+    Left,
+    Right,
 }
 
 impl Solution {
@@ -16,15 +16,15 @@ impl Solution {
             let node = node.borrow();
 
             match last_direction {
-                Direction::LEFT => {
-                    let left_longest = Self::dfs(&node.left, 1, Direction::LEFT);
-                    let right_longest = Self::dfs(&node.right, count + 1, Direction::RIGHT);
+                Direction::Left => {
+                    let left_longest = Self::dfs(&node.left, 1, Direction::Left);
+                    let right_longest = Self::dfs(&node.right, count + 1, Direction::Right);
 
                     max(left_longest, right_longest)
                 }
-                Direction::RIGHT => {
-                    let left_longest = Self::dfs(&node.left, count + 1, Direction::LEFT);
-                    let right_longest = Self::dfs(&node.right, 1, Direction::RIGHT);
+                Direction::Right => {
+                    let left_longest = Self::dfs(&node.left, count + 1, Direction::Left);
+                    let right_longest = Self::dfs(&node.right, 1, Direction::Right);
 
                     max(left_longest, right_longest)
                 }
@@ -35,8 +35,8 @@ impl Solution {
     }
     pub fn longest_zig_zag(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
         if let Some(node) = root {
-            let left_longest = Self::dfs(&node.borrow().left, 1, Direction::LEFT);
-            let right_longest = Self::dfs(&node.borrow().right, 1, Direction::RIGHT);
+            let left_longest = Self::dfs(&node.borrow().left, 1, Direction::Left);
+            let right_longest = Self::dfs(&node.borrow().right, 1, Direction::Right);
             max(left_longest, right_longest)
         } else {
             0

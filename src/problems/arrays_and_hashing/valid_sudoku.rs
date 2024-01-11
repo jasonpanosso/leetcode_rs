@@ -40,7 +40,7 @@ impl Solution {
                 }
             }
         }
-        return true;
+        true
     }
 }
 

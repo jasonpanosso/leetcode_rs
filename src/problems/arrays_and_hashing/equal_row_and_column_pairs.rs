@@ -18,9 +18,7 @@ impl Solution {
         for i in 0..grid_len {
             column.clear();
 
-            for j in 0..grid_len {
-                column.push(grid[j][i])
-            }
+            (0..grid_len).for_each(|j| column.push(grid[j][i]));
 
             if let Some(count) = map.get(&column) {
                 pairs_count += count;

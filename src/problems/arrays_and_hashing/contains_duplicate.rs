@@ -16,12 +16,12 @@ mod tests {
     #[test]
     fn test_no_duplicates() {
         let nums = vec![1, 2, 3];
-        assert_ne!(Solution::contains_duplicate(nums), true);
+        assert!(!Solution::contains_duplicate(nums));
     }
 
     #[test]
     fn test_duplicates() {
         let nums = vec![1, 2, 3, 1];
-        assert_eq!(Solution::contains_duplicate(nums), true);
+        assert!(Solution::contains_duplicate(nums));
     }
 }

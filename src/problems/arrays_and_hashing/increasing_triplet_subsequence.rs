@@ -15,7 +15,7 @@ impl Solution {
             }
         }
 
-        return false;
+        false
     }
 }
 

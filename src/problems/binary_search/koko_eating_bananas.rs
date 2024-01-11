@@ -23,9 +23,9 @@ impl Solution {
 
     fn ceiling_div(a: i32, b: i32) -> i32 {
         if a % b != 0 {
-            return a / b + 1;
+            a / b + 1
         } else {
-            return a / b;
+            a / b
         }
     }
 }

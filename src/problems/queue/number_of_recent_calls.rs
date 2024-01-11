@@ -15,6 +15,12 @@ pub struct RecentCounter {
  * let obj = RecentCounter::new();
  * let ret_1: i32 = obj.ping(t);
  */
+impl Default for RecentCounter {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl RecentCounter {
     pub fn new() -> Self {
         RecentCounter {
@@ -25,7 +31,7 @@ impl RecentCounter {
     }
 
     pub fn ping(&mut self, t: i32) -> i32 {
-        self.pings.retain(|time| *time >= t - &self.recent_range);
+        self.pings.retain(|time| *time >= t - self.recent_range);
 
         self.current_time = t;
         self.pings.push(t);

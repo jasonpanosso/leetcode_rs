@@ -23,24 +23,24 @@ mod tests {
     #[test]
     fn test_all_bracket_types_expect_true() {
         let s = String::from("()[]{}");
-        assert_eq!(Solution::is_valid(s), true);
+        assert!(Solution::is_valid(s));
     }
 
     #[test]
     fn test_single_parenthesis_expect_true() {
         let s = String::from("()");
-        assert_eq!(Solution::is_valid(s), true);
+        assert!(Solution::is_valid(s));
     }
 
     #[test]
     fn test_incorrect_match_expect_false() {
         let s = String::from("(]");
-        assert_eq!(Solution::is_valid(s), false);
+        assert!(!Solution::is_valid(s));
     }
     
     #[test]
     fn test_can_handle_popping_from_empty_stack() {
         let s = String::from("}");
-        assert_eq!(Solution::is_valid(s), false);
+        assert!(!Solution::is_valid(s));
     }
 }

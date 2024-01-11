@@ -23,7 +23,7 @@ impl Solution {
                 return false;
             }
         }
-        return true;
+        true
     }
 }
 
@@ -35,20 +35,20 @@ mod tests {
     fn test_anagram() {
         let s = String::from("rat");
         let t = String::from("tar");
-        assert_eq!(Solution::is_anagram(s, t), true);
+        assert!(Solution::is_anagram(s, t));
     }
 
     #[test]
     fn test_non_anagram() {
         let s = String::from("one");
         let t = String::from("two");
-        assert_ne!(Solution::is_anagram(s, t), true);
+        assert!(!Solution::is_anagram(s, t));
     }
 
     #[test]
     fn test_differing_length() {
         let s = String::from("thre");
         let t = String::from("three");
-        assert_ne!(Solution::is_anagram(s, t), true);
+        assert!(!Solution::is_anagram(s, t));
     }
 }

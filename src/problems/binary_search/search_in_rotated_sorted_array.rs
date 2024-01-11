@@ -3,7 +3,7 @@ pub struct Solution;
 use std::cmp::Ordering;
 impl Solution {
     pub fn search(nums: Vec<i32>, target: i32) -> i32 {
-        let (mut left, mut right) = (0 as usize, nums.len() - 1);
+        let (mut left, mut right) = (0_usize, nums.len() - 1);
         let mut pivot = 0;
 
         while left <= right {
@@ -27,7 +27,7 @@ impl Solution {
                 Ordering::Less => right = mid,
             }
         }
-        return -1;
+        -1
     }
 }
 

@@ -16,7 +16,7 @@ impl Solution {
             .chars()
             .zip(word2.chars())
             .fold(String::from(""), |acc, cur| {
-                return acc + &cur.0.to_string() + &cur.1.to_string();
+                acc + &cur.0.to_string() + &cur.1.to_string()
             })
             + &longer_word[shorter_word.len()..]
     }
