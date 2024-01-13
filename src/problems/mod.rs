@@ -1,4 +1,5 @@
 pub mod arrays_and_hashing;
+pub mod backtracking;
 pub mod binary_search;
 pub mod binary_search_tree;
 pub mod binary_tree;
