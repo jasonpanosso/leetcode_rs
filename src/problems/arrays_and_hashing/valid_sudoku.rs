@@ -1,46 +1,43 @@
+use std::collections::HashSet;
+
 pub struct Solution;
 
 impl Solution {
-    fn has_repeated_chars(chars: &[char]) -> bool {
-        use std::collections::HashSet;
-        let mut set = HashSet::new();
-        for &ch in chars {
-            if ch != '.' && !set.insert(ch) {
-                return true;
-            }
-        }
-        false
-    }
     pub fn is_valid_sudoku(board: Vec<Vec<char>>) -> bool {
-        // check rows valid
-        for row in board.iter() {
-            if Self::has_repeated_chars(row) {
-                return false;
-            }
-        }
-        // check columns valid
+        let mut set = HashSet::with_capacity(9);
+        let board = &board;
+
+        // check rows & columns
         for i in 0..9 {
-            let column: Vec<char> = board.iter().map(|row| row[i]).collect();
-            if Self::has_repeated_chars(&column) {
+            if !Self::slice_is_valid(&board[i], &mut set) {
+                return false;
+            }
+
+            if !Self::slice_is_valid(
+                &(0..9).map(|j| board[j][i]).collect::<Vec<char>>(),
+                &mut set,
+            ) {
                 return false;
             }
         }
-        // check 9x9 grids valid
-        for i in (0..=6).step_by(3) {
-            let rows: Vec<&Vec<char>> = (i..i + 3).map(|i| &board[i]).collect();
-            let mut subgrids: Vec<Vec<char>> = vec![vec![]; 3];
-            for (j, k) in (0..=6).step_by(3).enumerate() {
-                rows.iter()
-                    .for_each(|row| subgrids[j].extend_from_slice(&row[k..k + 3]))
-            }
-            for grid in subgrids {
-                if Self::has_repeated_chars(&grid) {
-                    println!("{:?}", grid);
-                    return false;
-                }
-            }
-        }
-        true
+
+        // check 3x3 subgrids
+        (0..9).step_by(3).all(|row| {
+            (0..9).step_by(3).all(|col| {
+                Self::slice_is_valid(
+                    &(0..3)
+                        .flat_map(|i| (0..3).map(move |j| board[row + i][col + j]))
+                        .collect::<Vec<char>>(),
+                    &mut set,
+                )
+            })
+        })
+    }
+
+    fn slice_is_valid(slice: &[char], set: &mut HashSet<char>) -> bool {
+        set.clear();
+
+        slice.iter().all(|ch| *ch == '.' || set.insert(*ch))
     }
 }
 
@@ -61,6 +58,7 @@ mod tests {
             vec!['.', '.', '.', '4', '1', '9', '.', '.', '5'],
             vec!['.', '.', '.', '.', '8', '.', '.', '7', '9'],
         ];
+
         assert!(Solution::is_valid_sudoku(board))
     }
 
@@ -77,6 +75,7 @@ mod tests {
             vec!['.', '.', '.', '4', '1', '9', '.', '.', '5'],
             vec!['.', '.', '.', '.', '8', '.', '.', '7', '9'],
         ];
+
         assert!(!Solution::is_valid_sudoku(board))
     }
 
@@ -93,6 +92,24 @@ mod tests {
             vec!['.', '.', '.', '.', '.', '.', '.', '.', '.'],
             vec!['.', '.', '.', '.', '7', '.', '.', '.', '.'],
         ];
+
         assert!(Solution::is_valid_sudoku(board))
+    }
+
+    #[test]
+    fn test_invalid_subgrid() {
+        let board: Vec<Vec<char>> = vec![
+            vec!['.', '9', '.', '.', '4', '.', '.', '.', '.'],
+            vec!['1', '.', '.', '.', '.', '.', '6', '.', '.'],
+            vec!['.', '.', '9', '.', '.', '.', '.', '.', '.'],
+            vec!['.', '.', '.', '.', '.', '.', '.', '.', '.'],
+            vec!['.', '.', '.', '7', '.', '.', '.', '.', '.'],
+            vec!['3', '.', '.', '.', '5', '.', '.', '.', '.'],
+            vec!['.', '.', '7', '.', '.', '4', '.', '.', '.'],
+            vec!['.', '.', '.', '.', '.', '.', '.', '.', '.'],
+            vec!['.', '.', '.', '.', '7', '.', '.', '.', '.'],
+        ];
+
+        assert!(!Solution::is_valid_sudoku(board))
     }
 }
